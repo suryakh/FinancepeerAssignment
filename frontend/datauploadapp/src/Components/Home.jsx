@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { uploadFile } from '../Redux/Actions'
 import axios from 'axios'
 
@@ -35,7 +35,6 @@ export class Home extends Component {
         }
     }
     render() {
-        console.log(this.state.file)
         if (this.props.value.loginStatus) {
             return (
                 <>
@@ -52,6 +51,10 @@ export class Home extends Component {
                         <div>
                             {this.state.uploadStatus && <h4>file name :{this.state.file.name}</h4>}
                         </div>
+                        <div>
+                            <Link to="/displaydata">Show uploaded data</Link>
+                            {this.props.data.dataUploaded && <h1>Uploading......</h1>}
+                        </div>
                     </div>
                 </>
             )
@@ -65,7 +68,8 @@ export class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    value: state.userReducers
+    value: state.userReducers,
+    data: state.dataReducers
 })
 
 const mapDispatchToProps = dispatch => {

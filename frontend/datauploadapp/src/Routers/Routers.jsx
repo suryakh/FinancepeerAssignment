@@ -7,6 +7,7 @@ import { logout } from '../Redux/Actions'
 import Logout from '../Common/Logout'
 import Nav from '../Common/Nav'
 import Home from '../Components/Home'
+import Displaydata from '../Components/Displaydata'
 
 export class Routers extends Component {
     handleClick = () => {
@@ -23,6 +24,7 @@ export class Routers extends Component {
                         <Route path='/login' exact render={(props) => <Login  {...props} />} />
                         <Route path='/signup' exact render={(props) => <Signup {...props} />} />
                         <Route path='/logout' exact render={(props) => <Logout {...props} />} />
+                        <Route path='/displaydata' exact render={(props) => <Displaydata {...props} />} />
                     </Switch>
                 </div>
             </>

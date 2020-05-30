@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {getData } from '../Redux/Actions'
 
 export class Displaydata extends Component {
     constructor(props){
@@ -9,9 +10,11 @@ export class Displaydata extends Component {
         }
     }
     componentDidMount(){
-        this.props.getData(this.props.valeu.token)
+        this.props.getData(this.props.value.token)
     }
     render() {
+        console.log(this.props.data)
+
         return (
             <div>
                 
@@ -21,11 +24,14 @@ export class Displaydata extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    value: state.userReducers
+    value: state.userReducers,
+    data:state.dataReducers
 })
 
-const mapDispatchToProps = {
-    
+const mapDispatchToProps = dispatch => {
+    return {
+        getData: (token) => dispatch(getData(token))
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Displaydata)

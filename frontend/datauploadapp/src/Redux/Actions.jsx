@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './Action_types'
+import { LOGIN, LOGOUT ,GET_UPLOADED_DATA, REQUESTSENT,DATA_UPLOADED } from './Action_types'
 import axios from 'axios'
 
 const login = (data) => {
@@ -10,6 +10,22 @@ const login = (data) => {
 const logout = () => {
     return {
         type: LOGOUT
+    }
+}
+const gettingdata = (Data) =>{
+    return {
+        type:GET_UPLOADED_DATA,
+        payload:Data
+    }
+}
+const requestSent=()=>{
+    return {
+        type:REQUESTSENT
+    }
+}
+const dataUploaded =()=>{
+    return {
+        type:DATA_UPLOADED
     }
 }
 
@@ -48,6 +64,7 @@ const signupUser = (data) => {
 
 const uploadFile = (data,token) =>{
     return dispatch =>{
+        dispatch(requestSent())
         axios({
             method: "POST",
             url: 'http://localhost:5000/fileupload/files',
@@ -56,9 +73,25 @@ const uploadFile = (data,token) =>{
             },
             data: data
         })
-        .then((res)=>alert("successfully updated"))
+        .then((res)=> {alert("successfully updated")
+           dispatch(dataUploaded())
+    }
+        )
 
     }
 }
+const getData = (token)=>{
+    return dispatch =>{
+        dispatch(requestSent())
+        axios({
+            method:"GET",
+            url:'http://localhost:5000/fileupload/data',
+            headers:{
+                'Authorization': token
+            }
+        })
+        .then((res)=>dispatch(gettingdata(res.data)))
+    }
+}
 
-export {loginUser,signupUser,logout,uploadFile}
+export {loginUser,signupUser,logout,uploadFile,getData}

@@ -22,12 +22,37 @@ def fileuploading():
         for p in data:
             cursor = mysql.connection.cursor()
             cursor.execute(
-                """INSERT INTO usersDetails (title,body,userId,loginUserid) values(%s ,%s, %s,%s)""",(p['title'],p['body'],p['userId'],decode_data['id'])
+                """select * from usersDetails where title = %s and loginUserid = %s""",(p['title'],decode_data['id'])
             )
-            mysql.connection.commit()
+            results =cursor.fetchone()
+            # print(results,"hhhh")
+            if results == None:
+                cursor.execute(
+                    """INSERT INTO usersDetails (title,body,userId,loginUserid) values(%s ,%s, %s,%s)""",(p['title'],p['body'],p['userId'],decode_data['id'])
+                )
+                mysql.connection.commit()
             cursor.close()
         return json.dumps({"path":f.filename})
     except:
         return "error",400
 
 
+@fileUpload.route('/data')
+def getData():
+    token = request.headers.get('Authorization')
+    encoded_Data = token.split(" ")[0]
+    try:
+        decode_data = jwt.decode(encoded_Data,'users',algorithms=['HS256'])
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+        """select * from usersDetails where loginUserid = %s""",(decode_data['id'],)
+        )
+        results = cursor.fetchall()
+        cursor.close()
+        items = []
+        for item in results:
+            items.append(item)
+        return jsonify(items)
+    except:
+        return json.dumps({"message":"error"}),400
+        

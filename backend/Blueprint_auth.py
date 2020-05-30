@@ -34,10 +34,9 @@ def register():
 def login():
     username = request.json["username"]
     password = request.json["password"]
-    # print(password)
     cursor = mysql.connection.cursor()
     cursor.execute(
-        """select * from users where username= %s""",(username,)
+    """select * from users where username= %s""",(username,)
     )
     results = cursor.fetchone()
     if results != None:
