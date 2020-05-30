@@ -8,7 +8,7 @@ import jwt
 from server import mysql
 
 
-auth = Blueprint("auth",__name__)
+auth = Blueprint("auth",__name__,static_url_path="/static")
 
 
 @auth.route("/signup" ,methods=["POST"])
@@ -34,22 +34,25 @@ def register():
 def login():
     username = request.json["username"]
     password = request.json["password"]
-    print(password)
+    # print(password)
     cursor = mysql.connection.cursor()
     cursor.execute(
         """select * from users where username= %s""",(username,)
     )
-    results = cursor.fetchall()
-    user = results[0]
-    salt = user["salt"]
-    print(salt,password)
-    password_hash = hasing(password+str(salt))
-    print(password_hash,user["password_hash"])
-    if password_hash == user["password_hash"]:
-        encode_Data = jwt.encode({"id":user["id"]},'users',algorithm= 'HS256').decode('utf-8')
-        return json.dumps({"token":str(encode_Data),"username":user["username"]})
+    results = cursor.fetchone()
+    if results != None:
+        user = results
+        salt = user["salt"]
+        print(salt,password)
+        password_hash = hasing(password+str(salt))
+        print(password_hash,user["password_hash"])
+        if password_hash == user["password_hash"]:
+            encode_Data = jwt.encode({"id":user["id"]},'users',algorithm= 'HS256').decode('utf-8')
+            return json.dumps({"token":str(encode_Data),"username":user["username"]})
+        else:
+            return json.dumps({"message":"invalid input"}),400 
     else:
-        return json.dumps({"message":"inavlid input"}),400      
+        return json.dumps({"message":"invalid input"}),400      
 
 def generate_salt():
     salt = os.urandom(16)

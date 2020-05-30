@@ -24,11 +24,9 @@ const loginUser = (data) => {
                 if (res.data.token) {
                     dispatch(login(res.data))
                 }
-                else {
-                    alert("invalid credentials")
-                }
             }
             )
+            .catch(err=>alert("invalid username"))
     };
 }
 
@@ -48,4 +46,19 @@ const signupUser = (data) => {
     }
 }
 
-export {loginUser,signupUser,logout}
+const uploadFile = (data,token) =>{
+    return dispatch =>{
+        axios({
+            method: "POST",
+            url: 'http://localhost:5000/fileupload/files',
+            headers: {
+                'Authorization': token
+            },
+            data: data
+        })
+        .then((res)=>alert("successfully updated"))
+
+    }
+}
+
+export {loginUser,signupUser,logout,uploadFile}
