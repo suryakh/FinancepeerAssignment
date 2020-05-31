@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {Link, Redirect} from 'react-router-dom'
-import {loginUser} from '../Redux/Actions'
+import { Link, Redirect } from 'react-router-dom'
+import { loginUser } from '../Redux/Actions'
 
 export class Login extends Component {
     constructor(props) {
@@ -24,10 +24,10 @@ export class Login extends Component {
         this.props.loginUser(temp)
     }
     render() {
-        if(!this.props.value.loginStatus){
+        if (!this.props.userStatus.loginStatus) {
             return (
                 <div className="container d-flex justify-content-center">
-                    <div className="col-lg-6 col-xl-6 col-sm-12 col-md-12" style={{ height: "450px", marginTop: "20%" }}>
+                    <div className="col-lg-6 col-xl-6 col-sm-12 col-md-12 shadow" style={{ height: "350px", marginTop: "20%" }}>
                         <div className="row p-5 formdiv" >
                             <div className="col-12">
                                 <label>Username</label>
@@ -52,15 +52,15 @@ export class Login extends Component {
             )
         }
         else {
-            return(
-                <Redirect to ="/" />
+            return (
+                <Redirect to="/" />
             )
         }
-        }
+    }
 }
 
 const mapStateToProps = (state) => ({
-    value: state.userReducers
+    userStatus: state.userReducers
 })
 const mapDispatchToProps = dispatch => {
     return {

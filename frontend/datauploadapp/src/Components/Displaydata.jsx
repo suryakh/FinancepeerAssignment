@@ -1,31 +1,59 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {getData } from '../Redux/Actions'
+import { getData } from '../Redux/Actions'
+import { Redirect } from 'react-router-dom'
 
 export class Displaydata extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
 
         }
     }
-    componentDidMount(){
-        this.props.getData(this.props.value.token)
+    componentDidMount() {
+        this.props.getData(this.props.userStatus.token)
     }
     render() {
-        console.log(this.props.data)
+        if (this.props.userStatus.loginStatus) {
+            if (this.props.data.userData.length === 0) {
+                return (<>
+                    <h2>No data</h2>
+                </>)
+            }
+            else {
+                return (
+                    <>
+                        <div className="container">
+                            <h3>Uploaded data</h3>
+                            <div className="row">
+                                {this.props.data.requestStatus && this.props.data.userData.map((ele) => <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="m-1 p-3 border shadow" style={{ height: "330px" }}>
+                                        <div className="m-1">userId: User{ele.userId}</div>
+                                        <div className="m-1">
+                                            title:{ele.title}</div>
+                                        <div className="m-1">body:{ele.body}</div>
+                                    </div>
+                                </div>
+                                )}
+                            </div>
 
-        return (
-            <div>
-                
-            </div>
-        )
+                        </div>
+
+                    </>
+                )
+            }
+        }
+        else {
+            return (
+                <Redirect to="/logout" />
+            )
+        }
     }
 }
 
 const mapStateToProps = (state) => ({
-    value: state.userReducers,
-    data:state.dataReducers
+    userStatus: state.userReducers,
+    data: state.dataReducers
 })
 
 const mapDispatchToProps = dispatch => {

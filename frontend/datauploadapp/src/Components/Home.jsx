@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import { uploadFile } from '../Redux/Actions'
-import axios from 'axios'
 
 export class Home extends Component {
     constructor(props) {
@@ -23,36 +22,36 @@ export class Home extends Component {
         let filePath = fileInput.value
         let validefile = /(\.json)$/i
         if (!validefile.exec(filePath)) {
-            alert("enter upload .json file only")
+            alert("please upload .json file only")
         }
         else {
             let formdata = new FormData()
             formdata.append("file", this.state.file)
-            this.props.uploadFile(formdata, this.props.value.token)
+            this.props.uploadFile(formdata, this.props.userStatus.token)
             this.setState({
                 uploadStatus: false
             })
         }
     }
     render() {
-        if (this.props.value.loginStatus) {
+        if (this.props.userStatus.loginStatus) {
             return (
                 <>
-                    <div>
+                    <div className="container text-center mt-5 p-3 border">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="file" onChange={this.fileLoad} />
                                 <label class="custom-file-label">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-success" type="button" onClick={this.fileUpload} >Button</button>
+                                <button class="btn btn-outline-success" type="button" onClick={() => this.fileUpload()} >Button</button>
                             </div>
                         </div>
-                        <div>
-                            {this.state.uploadStatus && <h4>file name :{this.state.file.name}</h4>}
+                        <div className="m-4">
+                            {this.state.uploadStatus && <h4>Selected file name : {this.state.file.name}</h4>}
                         </div>
-                        <div>
-                            <Link to="/displaydata">Show uploaded data</Link>
+                        <div className="m-5">
+                            <Link to="/displaydata"><button className="btn btn-primary m-5">Show uploaded data </button></Link>
                             {this.props.data.dataUploaded && <h1>Uploading......</h1>}
                         </div>
                     </div>
@@ -68,7 +67,7 @@ export class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    value: state.userReducers,
+    userStatus: state.userReducers,
     data: state.dataReducers
 })
 

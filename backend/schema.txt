@@ -1,0 +1,34 @@
+Tables Created:
+
++----------------------+
+| Tables_in_uploadData |
++----------------------+
+| users                |
+| usersDetails         |
++----------------------+
+
+users Table:
+describe users
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | int(11)      | NO   | PRI | NULL    | auto_increment |
+| username      | varchar(255) | YES  |     | NULL    |                |
+| email         | varchar(255) | YES  |     | NULL    |                |
+| salt          | varchar(255) | YES  |     | NULL    |                |
+| password_hash | varchar(255) | YES  |     | NULL    |                |
+| mobile        | varchar(255) | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+
+usersDetails:
+
+describe usersDetails;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(255) | YES  |     | NULL    |                |
+| body        | tinytext     | YES  |     | NULL    |                |
+| userId      | int(11)      | YES  |     | NULL    |                |
+| loginUserid | int(11)      | YES  | MUL | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+

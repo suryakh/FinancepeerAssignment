@@ -11,32 +11,32 @@ export class Nav extends Component {
         this.props.logout()
     }
     render() {
-        console.log(this.props.value.user)
+        console.log(this.props.userStatus.user)
         return (
-            <div className="navdiv p-3">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div className="row"><div className="col-9"><h4>Store Data</h4></div></div>
+            <div className="navdiv">
+                <nav class="navbar navbar-expand-lg navbar-light bg-primary p-4">
+                    <div className="col-5"><h4>Store Data</h4></div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-                        <div className="offset-8">
+                        <div className="offset-6">
                             <ul className="navbar-nav mt-2 mt-lg-0 float-right">
                                 <li className="nav-item">
                                     <div className="col-3 "> <Link to='/'><button className="btn btn-light">Home</button></Link></div>
                                 </li>
                                 <li className="nav-item">
-                                    {!this.props.value.loginStatus && <div className="col-3"> <Link to='/login'><button className="btn btn-light">Login</button></Link></div>}
+                                    {!this.props.userStatus.loginStatus && <div className="col-3"> <Link to='/login'><button className="btn btn-light">Login</button></Link></div>}
                                 </li>
                                 <li className="nav-item">
                                     <div className="col-3"><Link to='/Signup'><button className="btn btn-light">Signup</button></Link></div>
                                 </li>
-                                <li className="nav-item">
-                                    {this.props.value.loginStatus && <div className='row'><button className="btn btn-light "><FontAwesomeIcon icon={faUser} />{this.props.value.user}</button></div>}
+                                <li className="nav-item col-3">
+                                    {this.props.userStatus.loginStatus && <div className='row'><button className="btn btn-light "><FontAwesomeIcon icon={faUser} />{this.props.userStatus.user}</button></div>}
                                 </li>
                                 <li className="nav-item">
-                                    {this.props.value.loginStatus && <div className="col-3"><button className="btn btn-light" onClick={() => this.handleClick()}>Logout</button></div>}
+                                    {this.props.userStatus.loginStatus && <div className="col-3"><button className="btn btn-light" onClick={() => this.handleClick()}>Logout</button></div>}
                                 </li>
                             </ul>
                         </div>
@@ -49,7 +49,7 @@ export class Nav extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        value: state.userReducers
+        userStatus: state.userReducers
     }
 }
 

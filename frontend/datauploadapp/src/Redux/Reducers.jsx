@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT,REQUESTSENT,GET_UPLOADED_DATA,DATA_UPLOADED } from './Action_types'
+import { LOGIN, LOGOUT, REQUESTSENT, GET_UPLOADED_DATA, DATA_UPLOADED } from './Action_types'
 
 let initialState = {
     loginStatus: false,
@@ -6,9 +6,9 @@ let initialState = {
     token: "",
 }
 let datastate = {
-    requestStatus:false,
-    userData:[],
-    dataUploaded:false
+    requestStatus: false,
+    userData: [],
+    dataUploaded: false
 }
 
 const userReducers = (state = initialState, action) => {
@@ -35,27 +35,28 @@ const userReducers = (state = initialState, action) => {
     }
 }
 
-const dataReducers = (state = datastate,action) =>{
-    switch(action.type) {
-        case REQUESTSENT:{
+const dataReducers = (state = datastate, action) => {
+    switch (action.type) {
+        case REQUESTSENT: {
             return {
                 ...state,
-                requestStatus:false,
-                dataUploaded:true
+                requestStatus: false,
+                dataUploaded: true
             }
         }
-        case GET_UPLOADED_DATA:{
+        case GET_UPLOADED_DATA: {
             return {
                 ...state,
-                userData:action.payload,
-                requestStatus:true
+                userData: action.payload,
+                requestStatus: true,
+                dataUploaded: false
             }
         }
-        case DATA_UPLOADED:{
+        case DATA_UPLOADED: {
             return {
                 ...state,
-                // requestStatus:true,
-                dataUploaded:false
+                requestStatus: true,
+                dataUploaded: false
             }
         }
         default:
@@ -63,4 +64,4 @@ const dataReducers = (state = datastate,action) =>{
     }
 }
 
-export {userReducers,dataReducers}
+export { userReducers, dataReducers }

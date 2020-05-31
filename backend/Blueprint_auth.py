@@ -17,10 +17,8 @@ def register():
     email= request.json["email"]
     mobile = request.json["mobile"]
     password = request.json["password"]
-    print(password,"1")
     salt = generate_salt().decode('utf-8')
     password_hash = hasing(password + str(salt))
-    print(password_hash,"2")
     cursor = mysql.connection.cursor()
     cursor.execute(
         """INSERT INTO users (username, email, salt, password_hash,mobile)
@@ -42,9 +40,7 @@ def login():
     if results != None:
         user = results
         salt = user["salt"]
-        print(salt,password)
         password_hash = hasing(password+str(salt))
-        print(password_hash,user["password_hash"])
         if password_hash == user["password_hash"]:
             encode_Data = jwt.encode({"id":user["id"]},'users',algorithm= 'HS256').decode('utf-8')
             return json.dumps({"token":str(encode_Data),"username":user["username"]})

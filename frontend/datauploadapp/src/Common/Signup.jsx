@@ -40,7 +40,7 @@ export class Signup extends Component {
     render() {
         return (
             <div className="container d-flex justify-content-center">
-                <div className="col-lg-6 col-xl-6 col-sm-12 col-md-12" style={{ height: "550px", marginTop: "10%" }}>
+                <div className="col-lg-6 col-xl-6 col-sm-12 col-md-12 shadow" style={{ height: "450px", marginTop: "10%" }}>
                     <div className="row p-5 formdiv">
                         <div className="col-12">
                             <label>Username</label>
@@ -58,7 +58,7 @@ export class Signup extends Component {
                             <label>Password</label>
                         </div>
                         <div className="col-12">
-                            <input className="col-12 form-control" type="text" name="password" placeholder="enter password" value={this.state.password} onChange={this.handleChange} />
+                            <input className="col-12 form-control" type="password" name="password" placeholder="enter password" value={this.state.password} onChange={this.handleChange} />
                         </div>
                         <div className="col-12">
                             <label>Mobile</label>
@@ -77,7 +77,7 @@ export class Signup extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    value: state.userReducers
+    userStatus: state.userReducers
 })
 
 const mapDispatchToProps = dispatch => {

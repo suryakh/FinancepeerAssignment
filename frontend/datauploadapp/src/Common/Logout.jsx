@@ -6,8 +6,10 @@ export class Logout extends Component {
     render() {
         console.log(this.props.value)
         return (
-            <div>
+            <div className="container">
+                <div className="mt-5 text-center">
                 <h4>User successfully loggedout <Link to = "/login">login here</Link></h4>
+                </div>
             </div>
         )
     }

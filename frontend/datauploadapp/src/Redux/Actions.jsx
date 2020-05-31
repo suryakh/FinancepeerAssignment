@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT ,GET_UPLOADED_DATA, REQUESTSENT,DATA_UPLOADED } from './Action_types'
+import { LOGIN, LOGOUT, GET_UPLOADED_DATA, REQUESTSENT, DATA_UPLOADED } from './Action_types'
 import axios from 'axios'
 
 const login = (data) => {
@@ -12,20 +12,20 @@ const logout = () => {
         type: LOGOUT
     }
 }
-const gettingdata = (Data) =>{
+const gettingdata = (Data) => {
     return {
-        type:GET_UPLOADED_DATA,
-        payload:Data
+        type: GET_UPLOADED_DATA,
+        payload: Data
     }
 }
-const requestSent=()=>{
+const requestSent = () => {
     return {
-        type:REQUESTSENT
+        type: REQUESTSENT
     }
 }
-const dataUploaded =()=>{
+const dataUploaded = () => {
     return {
-        type:DATA_UPLOADED
+        type: DATA_UPLOADED
     }
 }
 
@@ -42,7 +42,7 @@ const loginUser = (data) => {
                 }
             }
             )
-            .catch(err=>alert("invalid username"))
+            .catch(err => alert("invalid username"))
     };
 }
 
@@ -62,8 +62,8 @@ const signupUser = (data) => {
     }
 }
 
-const uploadFile = (data,token) =>{
-    return dispatch =>{
+const uploadFile = (data, token) => {
+    return dispatch => {
         dispatch(requestSent())
         axios({
             method: "POST",
@@ -73,25 +73,26 @@ const uploadFile = (data,token) =>{
             },
             data: data
         })
-        .then((res)=> {alert("successfully updated")
-           dispatch(dataUploaded())
-    }
-        )
+            .then((res) => {
+                alert("successfully updated")
+                dispatch(dataUploaded())
+            }
+            )
 
     }
 }
-const getData = (token)=>{
-    return dispatch =>{
+const getData = (token) => {
+    return dispatch => {
         dispatch(requestSent())
         axios({
-            method:"GET",
-            url:'http://localhost:5000/fileupload/data',
-            headers:{
+            method: "GET",
+            url: 'http://localhost:5000/fileupload/data',
+            headers: {
                 'Authorization': token
             }
         })
-        .then((res)=>dispatch(gettingdata(res.data)))
+            .then((res) => dispatch(gettingdata(res.data)))
     }
 }
 
-export {loginUser,signupUser,logout,uploadFile,getData}
+export { loginUser, signupUser, logout, uploadFile, getData }
