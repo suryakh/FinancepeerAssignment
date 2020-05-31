@@ -7,6 +7,7 @@ import Logout from '../Common/Logout'
 import Nav from '../Common/Nav'
 import Home from '../Components/Home'
 import Displaydata from '../Components/Displaydata'
+import Nomodule from '../Components/Nomodule'
 
 export class Routers extends Component {
     handleClick = () => {
@@ -15,7 +16,7 @@ export class Routers extends Component {
     render() {
         console.log(this.props.userStatus)
         return (
-            <>export default store
+            <>
                 <Nav />
                 <div>
                     <Switch>
@@ -24,6 +25,8 @@ export class Routers extends Component {
                         <Route path='/signup' exact render={(props) => <Signup {...props} />} />
                         <Route path='/logout' exact render={(props) => <Logout {...props} />} />
                         <Route path='/displaydata' exact render={(props) => <Displaydata {...props} />} />
+                        <Route exact component={Nomodule} />
+
                     </Switch>
                 </div>
             </>
