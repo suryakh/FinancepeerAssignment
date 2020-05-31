@@ -28,10 +28,10 @@ export class Displaydata extends Component {
                             <div className="row">
                                 {this.props.data.requestStatus && this.props.data.userData.map((ele) => <div className="col-lg-3 col-md-4 col-sm-6">
                                     <div className="m-1 p-3 border shadow" style={{ height: "330px" }}>
-                                        <div className="m-1">userId: User{ele.userId}</div>
-                                        <div className="m-1">
-                                            title:{ele.title}</div>
-                                        <div className="m-1">body:{ele.body}</div>
+                                        <div className="mt-2"><b>userId:</b> User{ele.userId}</div>
+                                        <div className="mt-2">
+                                            <b>Title:</b>{ele.title}</div>
+                                        <div className="mt-2"><b>body:</b>{ele.body}</div>
                                     </div>
                                 </div>
                                 )}
