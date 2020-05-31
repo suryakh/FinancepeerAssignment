@@ -15,7 +15,7 @@ export class Routers extends Component {
     render() {
         console.log(this.props.userStatus)
         return (
-            <>
+            <>export default store
                 <Nav />
                 <div>
                     <Switch>

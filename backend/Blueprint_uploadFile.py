@@ -25,7 +25,6 @@ def fileuploading():
                 """select * from usersDetails where title = %s and loginUserid = %s""",(p['title'],decode_data['id'])
             )
             results =cursor.fetchone()
-            # print(results,"hhhh")
             if results == None:
                 cursor.execute(
                     """INSERT INTO usersDetails (title,body,userId,loginUserid) values(%s ,%s, %s,%s)""",(p['title'],p['body'],p['userId'],decode_data['id'])

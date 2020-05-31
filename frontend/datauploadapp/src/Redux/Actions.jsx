@@ -29,6 +29,8 @@ const dataUploaded = () => {
     }
 }
 
+// request for user login
+
 const loginUser = (data) => {
     return dispatch => {
         axios({
@@ -46,6 +48,8 @@ const loginUser = (data) => {
     };
 }
 
+// request for user signup
+
 const signupUser = (data) => {
     return dispatch => {
         axios({
@@ -61,6 +65,9 @@ const signupUser = (data) => {
             })
     }
 }
+
+
+//  uploading file
 
 const uploadFile = (data, token) => {
     return dispatch => {
@@ -81,6 +88,9 @@ const uploadFile = (data, token) => {
 
     }
 }
+
+// get uploaded data
+
 const getData = (token) => {
     return dispatch => {
         dispatch(requestSent())
