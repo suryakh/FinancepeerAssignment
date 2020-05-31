@@ -44,7 +44,7 @@ export class Home extends Component {
                                 <label class="custom-file-label">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-success" type="button" onClick={() => this.fileUpload()} >Button</button>
+                                <button class="btn btn-outline-success" type="button" onClick={() => this.fileUpload()} >Upload</button>
                             </div>
                         </div>
                         <div className="m-4">
